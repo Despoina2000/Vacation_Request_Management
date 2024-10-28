@@ -4,6 +4,8 @@ CREATE TABLE users
     # user’s id also table’s primary key
 username VARCHAR(100),
     # user’s username
+role VARCHAR(100),
+    # manager or employee
  password VARCHAR(200),
     # user’s password
  salt VARCHAR(32)
