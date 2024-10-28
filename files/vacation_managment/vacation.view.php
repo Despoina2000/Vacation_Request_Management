@@ -9,7 +9,7 @@
 <body>
 <div class="container">
     <h2>Vacation Requests</h2>
-    <a href="create_vacation.php" class="button">Request Vacation</a>
+    <a href="create_vacation.view.php" class="button">Request Vacation</a>
     <table>
         <thead>
         <tr>
