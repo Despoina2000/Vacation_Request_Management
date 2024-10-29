@@ -12,20 +12,37 @@ try{
             $users=get_users($pdo);
         }
         $_SESSION['users']=$users;
-
+        require_once("../config_session.php");
         $pdo=null;
         $statement=null;
         die();
     }
     else{
-        header("Location: login.php");
+        $_SESSION['wrong_role'] = 'You are not manager.';
+        header("Location: login.view.php");
         die();
     }
+
+
+
 
 }catch (PDOException $e){
     die("Query failed: " . $e->getMessage());
 }
 
 function edit($user){
+    $_SESSION['edit_user']=$user;
+    header("Location: create_user.view.php");
+    die();
+
+
+}
+
+function delete($user){
+    try{
+        delete_user($user['id'],$pdo);
+    }catch (PDOException $e){
+        die("Query failed: " . $e->getMessage());
+    }
 
 }

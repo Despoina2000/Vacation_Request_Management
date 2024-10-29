@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     try {
         require_once("../database_connection/database_handler.php");
         require_once("../database_connection/users.model.php");
-        require_once("sign-up.controler.php");
+
 
         $errors = [];
 
@@ -25,26 +25,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $errors['invalid_email'] = "Invalid email";
         }
 
-        if (is_username_exist($username, $pdo)) {
-            $errors['username_exists'] = "Username already exists";
+        if(!isset($_SESSION['edit_user'])) {
+            if (is_username_exist($username, $pdo)) {
+                $errors['username_exists'] = "Username already exists";
 
+            }
+
+            if (is_email_registered($email, $pdo)) {
+                $errors['email_registered'] = "Email already registered";
+
+            }
         }
 
-        if (is_email_registered($email, $pdo)) {
-            $errors['email_registered'] = "Email already registered";
 
-        }
 
         require_once("../config_session.php");
 
         if ($errors) {
             $_SESSION['errors'] = $errors;
-            header("Location: sign-up.php");
+            header("Location: create_user.view.php");
             die();
         }
 
-        create_user($username, $name, $surname, $email, $password, $role, $pdo);
-        header("Location: login.php");
+        if(isset($_SESSION['edit_user'])){
+            update_user($username, $name, $surname, $email, $password,'other', $_SESSION['edit_user']['id'],$pdo);
+        }
+        else{
+            create_user($username, $name, $surname, $email, $password, 'other', $pdo);
+        }
+
+
+        header("Location:manage_users.view.php");
         $pdo = null;
         $statement = null;
         die();
@@ -54,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
 } else {
-    header("Location: sign-up.php");
+    header("Location: create_user.view.php");
     die();
 }
 

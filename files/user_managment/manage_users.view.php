@@ -9,7 +9,7 @@
 <body>
 <div class="container">
     <h2>List of Users</h2>
-    <a href="create_user.php" class="button">Create User</a>
+    <a href="create_user.view.php" class="button">Create User</a>
     <table>
         <thead>
         <tr>
@@ -32,7 +32,7 @@
             echo "<td>
 
                              <button onclick='/'".edit($user['username'])."'/>Edit</button>| 
-                            <button onclick='/'".edit($user['username'])."'/>Edit</button>
+                            <button onclick='/'".delete($user['username'])."'/>Delete</button>
                           </td>";
             echo "</tr>";
         }

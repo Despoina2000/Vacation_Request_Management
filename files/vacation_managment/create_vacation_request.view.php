@@ -9,7 +9,7 @@
 <body>
 <div class="container">
     <h2>Vacation Request</h2>
-    <form action="save_vacation.php" method="POST">
+    <form action="create_vacation_request.controler.php" method="POST">
         <label for="date_from">Date From:</label>
         <input type="date" id="date_from" name="date_from" required>
 

@@ -8,8 +8,10 @@
 </head>
 <body>
 <div class="container">
+    <?php require_once("create_user.controler.php");
+    require_once("../config_session.php");?>
     <h2>Create/Edit User</h2>
-    <form action="manage_users.controler.php" method="POST">
+    <form action="create_user.controler.php" method="POST">
         <label for="username">Name:</label>
         <input type="text" id="username" name="username" required value="<?php echo $user['username'] ?? ''; ?>">
 

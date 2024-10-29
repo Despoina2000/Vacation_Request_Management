@@ -41,8 +41,9 @@ function set_user($username, $name, $surname, $email, $password,$role, $pdo){
     return $statement->fetch(PDO::FETCH_ASSOC);
 }
 
-function update_user($username, $name, $surname, $email, $password,$role, $pdo){
-    $statement = $pdo->prepare("INSERT INFO users SET username = :username, name = :name, surname = :surname, email = :email, role = :role, password = :password;");
+function update_user($username, $name, $surname, $email, $password,$role,$id, $pdo){
+    $statement = $pdo->prepare("UPDATE users SET username = :username, role = :role, password = :password WHERE id = :id;");
+    $statement->bindValue(':id', $id);
     $statement->bindValue(':username', $username);
     $statement->bindValue(':name', $name);
     $statement->bindValue(':surname', $surname);
@@ -56,6 +57,11 @@ function update_user($username, $name, $surname, $email, $password,$role, $pdo){
     $statement->execute();
 
     return $statement->fetch(PDO::FETCH_ASSOC);
+}
+
+function delete_user($id, $pdo){
+    $statement = $pdo->prepare("DELETE FROM users WHERE id = :id;");
+    $statement->execute();
 }
 
 function login($username, $password, $pdo){

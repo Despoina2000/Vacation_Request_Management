@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if($errors){
             $_SESSION['errors'] = $errors;
-            header("Location: login.php");
+            header("Location: login.view.php");
             die();
         }
 
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         else{
             $_SESSION['wrong_role'] = 'You are not manager or employee';
-            header("Location: login.php");
+            header("Location: login.view.php");
             $pdo=null;
             $statement=null;
             die();
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 else{
-    header("Location: login.php");
+    header("Location: login.view.php");
     die();
 }
 function invalid_inputs($username, $password, $pdo)

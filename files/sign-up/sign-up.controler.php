@@ -37,12 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if($errors){
             $_SESSION['errors'] = $errors;
-            header("Location: sign-up.php");
+            header("Location: sign-up.view.php");
             die();
         }
 
         create_user($username,$name,$surname, $email, $password,$role, $pdo);
-        header("Location: login.php");
+        header("Location: login.view.php");
         $pdo=null;
         $statement=null;
         die();
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
 }else{
-    header("Location: sign-up.php");
+    header("Location: sign-up.view.php");
     die();
 }
 
