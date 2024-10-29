@@ -27,7 +27,7 @@ last_update DATE,
 FOREIGN KEY(uid) REFERENCES users(id) ON DELETE CASCADE
 );
 
-CREATE TABLE vacation_request
+CREATE TABLE vacation_requests
 (
     id INT(11) AUTO_INCREMENT PRIMARY KEY,
     uid INT(11),
@@ -37,7 +37,7 @@ CREATE TABLE vacation_request
     date_to DATE NOT NULL,
     #   the last date of the vacation
     reason VARCHAR(200) NOT NULL,
-    is_approved BOOLEAN NOT NULL,
+    is_approved BOOLEAN DEFAULT null,
     FOREIGN KEY(uid) REFERENCES users(id) ON DELETE CASCADE
 );
 

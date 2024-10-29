@@ -1,7 +1,7 @@
 <?php
 
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' (isset($_SESSION['user'] )&& $_SESSION['user']['role']==='manager' )) {
     $username = $_POST["username"];
     $name = $_POST["name"];
     $surname = $_POST["surname"];
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
 
-        header("Location:manage_users.view.php");
+        header("Location:manage_users.controler.php");
         $pdo = null;
         $statement = null;
         die();
@@ -65,7 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
 } else {
-    header("Location: create_user.view.php");
+    $_SESSION['wrong_role'] = 'You are not manager.';
+    header("Location: login.view.php");
     die();
 }
 

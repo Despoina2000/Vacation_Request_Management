@@ -9,7 +9,7 @@
 <body>
 <div class="container">
     <h2>Vacation Requests</h2>
-    <a href="create_vacation_request.view.php" class="button">Request Vacation</a>
+    <a href="create_vacation_request.controler.php" class="button">Request Vacation</a>
     <table>
         <thead>
         <tr>
@@ -22,15 +22,31 @@
         </thead>
         <tbody>
         <?php
+        require_once("vacation_requests.view.php");
+        require_once("../config_session.php");
         // Fetch vacation requests from the database and display them
         // Assuming $requests is an array of vacation request data
-        foreach ($requests as $request) {
+        foreach ($_SESSION['requests'] as $request) {
             echo "<tr>";
             echo "<td>{$request['date_submitted']}</td>";
             echo "<td>{$request['date_from']} - {$request['date_to']}</td>";
             echo "<td>{$request['reason']}</td>";
-            echo "<td>{$request['total_days']}</td>";
-            echo "<td>{$request['status']}</td>";
+            if($request['is_approved']!=null){
+                if($request['is_approved']){
+                    echo "<td>Approved</td>";
+                }else{
+                    echo "<td>Rejected</td>";
+                }
+                echo "<td>{$request['is_approved']}</td>";
+            }else{
+                echo "<td>Pedding</td>";
+                echo "<td>
+
+                             <button onclick='/'".approve($request['id'])."'/>Approve</button>| 
+                             <button onclick='/'".reject($request['id'])."'/>Reject</button>|
+                            <button onclick='/'".delete($request['id'])."'/>Delete</button>
+                          </td>";
+            }
             echo "</tr>";
         }
         ?>

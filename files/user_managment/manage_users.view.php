@@ -9,7 +9,7 @@
 <body>
 <div class="container">
     <h2>List of Users</h2>
-    <a href="create_user.view.php" class="button">Create User</a>
+    <a href="create_user.controler.php" class="button">Create User</a>
     <table>
         <thead>
         <tr>

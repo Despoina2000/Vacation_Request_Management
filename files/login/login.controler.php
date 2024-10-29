@@ -69,3 +69,12 @@ function invalid_inputs($username, $password, $pdo)
         return false;
     }
 }
+function is_input_empty($inputs)
+{
+    foreach ($inputs as $input) {
+        if ($input == null) {
+            return true;
+        }
+    }
+    return false;
+}

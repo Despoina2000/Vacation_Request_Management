@@ -6,13 +6,14 @@ try{
 
 
     if(isset($_SESSION['user']) && $_SESSION['user']['role']==='manager'){
+        require_once("../config_session.php");
         $user = $_SESSION['user'];
         $users=[];
         if(get_users($pdo)){
             $users=get_users($pdo);
         }
         $_SESSION['users']=$users;
-        require_once("../config_session.php");
+        header("Location: manage_users.view.php");
         $pdo=null;
         $statement=null;
         die();

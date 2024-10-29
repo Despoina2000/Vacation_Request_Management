@@ -9,6 +9,7 @@
 <body>
 <div class="container">
     <h2>Vacation Request</h2>
+
     <form action="create_vacation_request.controler.php" method="POST">
         <label for="date_from">Date From:</label>
         <input type="date" id="date_from" name="date_from" required>
@@ -21,7 +22,12 @@
 
         <button type="submit">Save</button>
     </form>
+    <?php
+    require_once("create_vacation_request.controler.php");
+    require_once("../config_session.php");
+    ?>
 </div>
+
 </body>
 </html>
 
