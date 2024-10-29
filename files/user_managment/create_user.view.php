@@ -9,7 +9,7 @@
 <body>
 <div class="container">
     <h2>Create/Edit User</h2>
-    <form action="save_user.php" method="POST">
+    <form action="manage_users.controler.php" method="POST">
         <label for="username">Name:</label>
         <input type="text" id="username" name="username" required value="<?php echo $user['username'] ?? ''; ?>">
 

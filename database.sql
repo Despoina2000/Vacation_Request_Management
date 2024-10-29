@@ -10,9 +10,8 @@ role ENUM('manager', 'employee', 'other') NOT NULL,
     # manager/employee/other
  password VARCHAR(200) NOT NULL,
     # user’s password
- salt VARCHAR(32)
 );
-#the salt has been used in order to encode/decode the password
+
 
 CREATE TABLE logging
 (

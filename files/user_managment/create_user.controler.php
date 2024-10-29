@@ -1,5 +1,6 @@
 <?php
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST["username"];
     $name = $_POST["name"];
@@ -8,50 +9,51 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $role = $_POST["role"];
     $password = $_POST["password"];
 
-    try{
+    try {
         require_once("../database_connection/database_handler.php");
         require_once("../database_connection/users.model.php");
+        require_once("sign-up.controler.php");
 
-        $errors=[];
+        $errors = [];
 
-        if(is_input_empty([$username, $name, $surname, $email,$role, $password])){
+        if (is_input_empty([$username, $name, $surname, $email, $role, $password])) {
 
             $errors['empty_inputs'] = "Inputs not be empty";
         }
-        if(is_email_invalid( $email)){
+        if (is_email_invalid($email)) {
 
             $errors['invalid_email'] = "Invalid email";
         }
 
-        if(is_username_exist( $username, $pdo)){
+        if (is_username_exist($username, $pdo)) {
             $errors['username_exists'] = "Username already exists";
 
         }
 
-        if(is_email_registered( $email, $pdo)){
+        if (is_email_registered($email, $pdo)) {
             $errors['email_registered'] = "Email already registered";
 
         }
 
         require_once("../config_session.php");
 
-        if($errors){
+        if ($errors) {
             $_SESSION['errors'] = $errors;
             header("Location: sign-up.php");
             die();
         }
 
-        create_user($username,$name,$surname, $email, $password,$role, $pdo);
+        create_user($username, $name, $surname, $email, $password, $role, $pdo);
         header("Location: login.php");
-        $pdo=null;
-        $statement=null;
+        $pdo = null;
+        $statement = null;
         die();
 
-    }catch (PDOException $e){
+    } catch (PDOException $e) {
         die("Query failed: " . $e->getMessage());
     }
 
-}else{
+} else {
     header("Location: sign-up.php");
     die();
 }
@@ -76,24 +78,27 @@ function is_email_invalid($email)
     }
 }
 
-function is_username_exist($username, $pdo){
+function is_username_exist($username, $pdo)
+{
 
-    if(get_user($username, $pdo)) {
+    if (get_user($username, $pdo)) {
         return true;
     }
     return false;
 
 }
 
-function is_email_registered($email, $pdo){
-    if(get_email($email, $pdo)){
+function is_email_registered($email, $pdo)
+{
+    if (get_email($email, $pdo)) {
         return true;
     }
     return false;
 }
 
-function create_user($username,$name,$surname, $email, $password,$role, $pdo){
+function create_user($username, $name, $surname, $email, $password, $role, $pdo)
+{
 
-    set_user($username, $name, $surname, $email, $password,$role, $pdo);
+    set_user($username, $name, $surname, $email, $password, $role, $pdo);
 
 }

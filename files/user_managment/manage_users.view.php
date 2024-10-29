@@ -20,19 +20,24 @@
         </thead>
         <tbody>
         <?php
+        require_once("manage_users.controler.php");
+        require_once("../config_session.php");
+
         // Fetch users from the database and display them
         // Assuming $users is an array of user data
-        foreach ($users as $user) {
+        foreach ($_SESSION['users'] as $user) {
             echo "<tr>";
             echo "<td>{$user['username']}</td>";
             echo "<td>{$user['email']}</td>";
             echo "<td>
-                            <a href='edit_user.php?id={$user['id']}'>Edit</a> | 
-                            <a href='delete_user.php?id={$user['id']}'>Delete</a>
+
+                             <button onclick='/'".edit($user['username'])."'/>Edit</button>| 
+                            <button onclick='/'".edit($user['username'])."'/>Edit</button>
                           </td>";
             echo "</tr>";
         }
         ?>
+        <button onclick='<?php edit($user)?>'>Edit</button>
         </tbody>
     </table>
 </div>
